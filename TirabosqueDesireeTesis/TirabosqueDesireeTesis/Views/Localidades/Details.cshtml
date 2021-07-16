@@ -1,0 +1,37 @@
+﻿@model TirabosqueDesireeTesis.Models.Localidad
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" style="margin-top:100px; padding-top: 50px">
+
+    
+    <div>
+        <h2>Detalles Localidad</h2>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Provincia.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Provincia.Descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IdLocalidad }, new { @class="btn btn-warning"}) |
+        @Html.ActionLink("Listado de Localidades", "Index", new { }, new { @class = "btn btn-success" })
+    </p>
+    </div>

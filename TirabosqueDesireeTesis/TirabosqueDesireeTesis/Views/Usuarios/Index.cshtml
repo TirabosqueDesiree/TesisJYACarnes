@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TirabosqueDesireeTesis.Models.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" style="margin-top:100px; padding-top: 50px">
+    <h2>Listado de Clientes</h2>
+
+    <p>
+      
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Localidad.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Provincia.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreCompleto)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen)
+            </th>
+        
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Localidad.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provincia.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Imagen))
+                    {
+                        <img src="@Url.Content(item.Imagen)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                    }
+
+                </td>
+               
+            </tr>
+        }
+
+    </table>
+</div>

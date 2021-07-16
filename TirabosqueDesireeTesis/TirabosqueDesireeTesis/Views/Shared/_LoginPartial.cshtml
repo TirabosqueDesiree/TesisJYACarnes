@@ -1,0 +1,29 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-nav ml-auto mt-2 mt-lg-0" }))
+    {
+        @Html.AntiForgeryToken()
+        
+            <ul class="navbar-nav @*ml-auto mt-2 mt-lg-0*@">
+                
+
+                    @if (Session["Logo"] != null)
+                    {
+                        <img src="@Url.Content(Session["Logo"].ToString())" alt="Image" style="width:40px;height:40px;max-width: 100%; height: auto; padding-top: 5px" />
+                    }
+                    @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Cambiar Contraseña", @class = "nav-link" })
+               
+                <li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+            </ul>
+        
+    }
+}
+else
+{
+
+    @*<li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink"})</li>*@
+
+    <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+}

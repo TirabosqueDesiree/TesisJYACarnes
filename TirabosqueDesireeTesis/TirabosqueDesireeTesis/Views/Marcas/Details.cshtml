@@ -1,0 +1,36 @@
+﻿@model TirabosqueDesireeTesis.Models.Marca
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" style="margin-top:100px; padding-top: 50px">
+  
+
+    <div>
+        <h2>Detalle Marca:</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Categoria.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Categoria.Descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IdMarca }, new { @class = "btn btn-warning" }) |
+        @Html.ActionLink("Listado Marcas", "Index", new { }, new { @class = "btn btn-success" })
+    </p>
+</div>

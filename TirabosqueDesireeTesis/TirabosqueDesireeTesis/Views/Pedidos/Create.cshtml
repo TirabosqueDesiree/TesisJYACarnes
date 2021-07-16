@@ -1,0 +1,142 @@
+﻿@model TirabosqueDesireeTesis.Models.VMPedido
+
+@{
+    ViewBag.Title = "Nuevo Pedido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top:50px; padding-top: 50px">
+
+
+    <h2>Pedido</h2>
+    <br />
+    <p>@ViewBag.Mensaje</p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FechaPedido, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FechaPedido, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FechaPedido, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        @Html.LabelFor(model => model.IdUsuario, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("IdUsuario", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Observacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Observacion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Observacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Guardar Pedido" class="btn btn-primary" />
+                            @Html.ActionLink("Agregar Producto", "AgregarProducto", new { }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Listado de Pedido", "Index", new { }, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <h4>Detalle Pedido</h4>
+    <hr />
+    @if (Model.DetalleTemps.Count == 0)
+    {
+        <h5>NO HAY DETALLES AGREGADOS</h5>
+    }
+    else
+    {
+        <table class="table">
+            <tr align="center">
+                <th>
+                    @Html.DisplayNameFor(model => model.DetalleTemps[0].Producto.Imagen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DetalleTemps[0].Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DetalleTemps[0].Precio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DetalleTemps[0].Cantidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DetalleTemps[0].Valor)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.DetalleTemps)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.Producto.Imagen))
+                        {
+                            <img src="@Url.Content(item.Producto.Imagen)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td align="left">$
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td align="">
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td align="left">$
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+
+
+                    <td>
+
+                        @Html.ActionLink("Eliminar", "DeleteProducto", "Pedidos", new { id = item.IdProducto }, new { @class = "btn btn-danger", onclick = "return confirm('¿Esta seguro de eliminar este producto?')" })
+                    </td>
+                </tr>
+            }
+            
+            <tr style="border:groove">
+                <td colspan="3" align="">
+                    <strong>TOTAL: </strong>
+                </td>
+                <td align="left">
+                    <strong>@Html.DisplayFor(modelItem => Model.TotalCantidad)</strong>
+                </td>
+                <td align="left">$
+                    <strong>@Html.DisplayFor(modelItem => Model.TotalValor)</strong>
+                </td>
+
+            </tr>
+            
+
+        </table>
+
+    }
+
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

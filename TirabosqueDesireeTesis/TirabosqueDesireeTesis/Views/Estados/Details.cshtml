@@ -1,0 +1,28 @@
+﻿@model TirabosqueDesireeTesis.Models.Estado
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" style="margin-top:100px; padding-top: 50px">
+    
+
+    <div>
+        <h2>Detalle de Estado</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IdEstado }, new { @class = "btn btn-warning" }) |
+        @Html.ActionLink("Listado de Estados", "Index", new { }, new { @class = "btn btn-success" })
+    </p>
+</div>

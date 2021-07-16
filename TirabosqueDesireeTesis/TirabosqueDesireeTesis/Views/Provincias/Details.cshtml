@@ -1,0 +1,29 @@
+﻿@model TirabosqueDesireeTesis.Models.Provincia
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" style="margin-top:100px; padding-top: 50px">
+
+   
+
+    <div>
+        <h2>Detalles de provincia:</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IdProvincia }, new { @class = "btn btn-warning" }) |
+        @Html.ActionLink("Lista de Provincias", "Index", new { }, new { @class = "btn btn-success" })
+    </p>
+    </div>

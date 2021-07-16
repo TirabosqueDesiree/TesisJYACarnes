@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model TirabosqueDesireeTesis.Models.Usuario
+
+@*<style>
+    .foto {
+        padding:20px;
+        margin:100px;
+        text-align:right;
+    }
+</style>
+
+
+<div class="container foto">
+     
+
+    @if (Model != null && !string.IsNullOrEmpty(Model.Imagen))
+    {
+
+        <img src="@Url.Content(Model.Imagen)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+
+
+    }
+</div>*@

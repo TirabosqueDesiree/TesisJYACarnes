@@ -1,0 +1,30 @@
+﻿@model TirabosqueDesireeTesis.Models.IndexViewModel
+@{
+    ViewBag.Title = "Gestionar";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div class="container" style="margin-top:50px; padding-top: 50px">
+    <p class="text-success">@ViewBag.StatusMessage</p>
+
+    <div>
+        <h4>Cambiar la configuración de la cuenta</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>Contraseña:</dt>
+            <dd>
+
+                @if (Model.HasPassword)
+                {
+                    @Html.ActionLink("Cambiar la contraseña", "ChangePassword", new { }, new { @class = "btn btn-secondary" })
+                }
+                else
+                {
+                    @Html.ActionLink("Crear", "SetPassword")
+                }
+
+            </dd>
+
+        </dl>
+    </div>
+</div>

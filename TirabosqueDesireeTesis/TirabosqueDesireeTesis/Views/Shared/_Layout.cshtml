@@ -1,0 +1,509 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>J&A Carnes SA</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/Content/templatePrinc/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/templatePrinc/assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
+    <link href="~/Content/templatePrinc/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="~/Content/templatePrinc/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Content/templatePrinc/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="~/Content/templatePrinc/assets/vendor/venobox/venobox.css" rel="stylesheet" />
+    <link href="~/Content/templatePrinc/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="~/Content/templatePrinc/assets/css/style.css" rel="stylesheet" />
+
+    <script src="~/Content/fontawesome-free-5.15.3-web/js/all.min.js"></script>
+    <script src="~/Content/fontawesome-free-5.15.3-web/js/fontawesome.min.js"></script>
+
+    <link href="~/Content/fontawesome-free-5.15.3-web/css/fontawesome.css" rel="stylesheet" />
+    <!--ver-->
+
+    @Styles.Render("~/Content/css")
+
+    <!-- =======================================================
+
+
+    ======================================================== -->
+
+    <style>
+        .posicion {
+            margin: 4px;
+        }
+        .tam1{
+            font-size:20px;
+        }
+    </style>
+</head>
+
+<body>
+    @RenderBody()
+
+
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 d-flex align-items-center">
+                    <h1 class="logo mr-auto"><a href="#about">J&A Carnes SA<span>.</span></a></h1>
+
+                    <nav class="nav-menu d-none d-lg-block">
+                        <ul>
+
+                            <li><a href="#contact">Contáctanos</a></li>
+                            <li><a href="#services">Repartos</a></li>
+                            <li><a href="#pricing">Nuestros Productos</a></li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="dropdown">
+
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes<b></b></a>
+
+                                    <ul class="dropdown-menu">
+
+                                        <li class="">@Html.ActionLink("Lista De Pedidos Mensuales Por Estado", "ReporteListaPedidos", "Reportes")</li>
+                                        <li class="">@Html.ActionLink("Lista De Pedidos Por Cliente", "ReporteClienteYPedidos", "Reportes")</li>
+                                        <li class="">@Html.ActionLink("Ver Grafico Total Pedido Por Clientes", "ReporteGraficoTotal", "Reportes")</li>
+                                        <li class="">@Html.ActionLink("Ver Grafico Total Pedidos Despachados Por Clientes", "ReporteGraficoParcial", "Reportes")</li>
+                                        <li class="">@Html.ActionLink("Ver Grafico % Pedidos según estados", "Porcentajes", "Reportes")</li>
+
+                                    </ul>
+
+                                </li>
+                                <li class="dropdown">
+
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrador<b></b></a>
+
+                                    <ul class="dropdown-menu">
+                                        <li class="">@Html.ActionLink("Categorias", "Index", "Categorias")</li>
+                                        <li class="">@Html.ActionLink("Clientes", "Index", "Usuarios")</li>
+                                        <li class="">@Html.ActionLink("Estados", "Index", "Estados")</li>
+                                        <li class="">@Html.ActionLink("Localidades", "Index", "Localidades")</li>
+                                        <li class="">@Html.ActionLink("Marcas", "Index", "Marcas")</li>
+                                        <li class="">@Html.ActionLink("Ordenes", "ListaPedidos", "OrdenEmpleado")</li>
+                                        <li class="">@Html.ActionLink("Productos", "Index", "Productos")</li>
+                                        <li class="">@Html.ActionLink("Provincias", "Index", "Provincias")</li>
+
+                                    </ul>
+
+                                </li>
+                            }
+                            @if (User.IsInRole("User"))
+                            {
+
+                                <li class="dropdown">
+
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedidos<b></b></a>
+
+                                    <ul class="dropdown-menu">
+
+                                        <li class="">@Html.ActionLink("Realiza tu Pedido", "Create", "Pedidos")</li>
+                                        <li class="">@Html.ActionLink("Mis Pedidos", "MisPedidos", "Pedidos")</li>
+
+
+                                    </ul>
+
+                                </li>
+
+                            }
+                            @if (Session["User"] == null)
+                            {
+                                <li class="">@Html.ActionLink("Registrarse", "Create", "Usuarios")</li>
+                            }
+
+                            <li class="posicion">@Html.Partial("_LoginPartial")</li>
+                            <li>@Html.ActionLink("Términos y Condiciones", "TerminosYCondiciones", "Home")</li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <!-- ======= Hero Section ======= -->
+
+    <section id="desi" class="d-flex align-items-center">
+
+        <div class="container-fluid" data-aos="zoom-out" data-aos-delay="100">
+
+            <div class="row justify-content-center">
+                <img src="~/Content/templatePrinc/assets/img/840_560.jpg" id="" />
+
+                <div class="col-xl-10">
+                    <div class="row" id="fotoPrinc">
+                        <br />
+                        <div>
+                            <p style="font-size:25px; text-align:justify">
+                                Somos una empresa dedicada a la comercialización de alimentos de primera calidad en el mercado.
+                                Hemos  logrado posicionarnos entre las primeras comercializadoras de embutidos, cortes de cerdo premium y selección de carnes.
+                                Nuestro objetivo principal es brindarles a nuestros clientes una variedad de productos que combinan alta calidad y precios accesibles a todos los hogares. En J&ACarnes S.A. estamos comprometidos con brindarle la mejor calidad en nuestros productos, una atención personalizada y trato agradable.
+                            </p>
+                        </div>
+                 
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section><!-- End Hero -->
+
+    <main id="main">
+
+       
+        <section id="about" class="about section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row no-gutters">
+                    <div class="content col-xl-5 d-flex align-items-stretch">
+                        <div class="content">
+                            <h3>Tu carnicería Amiga</h3>
+                            <p>
+                                Calidad 100% garantizada. Desde siempre entregando a nuestros clientes productos de excelente calidad.
+                            </p>
+                            @Html.ActionLink("Mas info", "Faq", "Home", new { }, new { @class = "about-btn" })
+                        </div>
+                    </div>
+                    <div class="col-xl-7 d-flex align-items-stretch">
+                        <div class="icon-boxes d-flex flex-column justify-content-center">
+                            <div class="row">
+                                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+                                    <i class="fas fa-comment-dollar iconomio" style="width:30px; height:30px"></i>
+                                    <h4>Envíos gratis a domicilio</h4>
+                                    <p>En compras superiores a $4000</p>
+                                </div>
+                                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+                                    <i class="fab fa-product-hunt iconomio" style="width:30px; height:30px"></i>
+                                    <h4>Producto Fresco</h4>
+                                    <p>Proveemos productos frescos, con excelentes atributos de calidad de manera uniforme en el tiempo.</p>
+                                </div>
+                                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+                                    <i class="fas fa-pump-medical iconomio" style="width:30px; height:30px"></i>
+                                    <h4>Higiene</h4>
+                                    <p>Aplicamos normas de manipulación y conservación de alimentos que garantizan la inocuidad de nuestros productos.</p>
+                                </div>
+                                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+                                    <i class="fas fa-truck iconomio" style="width:30px; height:30px"></i>
+                                    <h4>Entrega dentro de las 48 hs</h4>
+                                    <p>Luego de realizado el pedido, nos comprometemos a una entrega eficiente.</p>
+                                </div>
+                            </div>
+                        </div><!-- End .content-->
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End About Section -->
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services section-bg ">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2> <i class="fas fa-truck"></i> REPARTOS</h2>
+                    <p class="tam1">Disponemos de una gestión de repartos, distribuidos por zonas. Informate que días corresponden con tu zona!!</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <i class="far fa-calendar-check" style="width:30px; height:30px"></i>
+                            <h3>Lunes</h3>
+
+                            <ul>
+                                <li>Ruta N°9</li>
+                                <li>Zona Local (Colonia Caroya - Jesús María)</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                            <i class="far fa-calendar-check" style="width:30px; height:30px"></i>
+                            <h3>Martes</h3>
+                            <ul>
+                                <li>Sierras Chicas</li>
+                                <li>Zona Local</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                            <i class="far fa-calendar-check" style="width:30px; height:30px"></i>
+                            <h3>Miércoles</h3>
+                            <ul>
+                                <li>Colonia Tirolesa</li>
+                                <li>Zona Local</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+                            <i class="far fa-calendar-check" style="width:30px; height:30px"></i>
+                            <h3>Jueves</h3>
+                            <ul>
+                                <li>Ruta N°9</li>
+                                <li>Zona Local</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="500">
+                            <i class="far fa-calendar-check" style="width:30px; height:30px"></i>
+                            <h3>Viernes</h3>
+
+                            <ul>
+                                <li>Catamarca</li>
+                                <li>Santiago del Estero</li>
+                              
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="600">
+                            <i class="far fa-calendar-check" style="width:30px; height:30px"></i>
+                            <h3>Sábados</h3>
+                            <ul>
+                                <li>Ruta N°9</li>
+                                <li>Zona Local</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section id="pricing" class="pricing section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Productos</h2>
+                    <p style="font-size:20px">Carne Vacuna, Carne de Cerdo, Pollos y Pescados.<br>
+                    Si desea realizar un pedido debe "Registrarse" previamente y crear una cuenta de usuario.
+                    </p>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="box" data-aos="fade-up" data-aos-delay="100">
+                            <h3>POLLOS</h3>
+                            <h4><span></span></h4>
+                            <img src="~/Content/templatePrinc/assets/img/POLLO.jpg" style="width: auto; height: 195px;" />
+                            <div class="btn-wrap">
+                                @Html.ActionLink("Ver", "VerPollos", "Productos", new { }, new { @class = "btn  btn-secondary" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
+                        <div class="box featured" data-aos="fade-up" data-aos-delay="200">
+                            <h3>CARNE VACUNA</h3>
+                            <h4><span></span></h4>
+                            <img src="~/Content/templatePrinc/assets/img/media res.jpg" style="width: auto; height: 195px;" />
+                            <div class="btn-wrap">
+                                @Html.ActionLink("Ver", "VerCarneVacuna", "Productos", new { }, new { @class = "btn  btn-secondary" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
+                        <div class="box" data-aos="fade-up" data-aos-delay="200">
+                            <h3>CARNE DE CERDO</h3>
+                            <h4><span> </span></h4>
+                            <img src="~/Content/templatePrinc/assets/img/CERDO.jpg" class="imgProducto" style="width: auto; height: 195px;" />
+                            <div class="btn-wrap">
+                                @Html.ActionLink("Ver", "VerCarneCerdo", "Productos", new { }, new { @class = "btn  btn-secondary" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+                        <div class="box featured" data-aos="fade-up" data-aos-delay="300">
+                            <h3>PESCADOS</h3>
+                            <h4><span></span></h4>
+                            <img src="~/Content/templatePrinc/assets/img/pescado2.jpg" style="width: auto; height: 195px;" />
+                            <div class="btn-wrap">
+                                @Html.ActionLink("Ver", "VerPescados", "Productos", new { }, new { @class = "btn  btn-secondary" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+       
+        <section id="contact" class="contact">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Contáctanos</h2>
+                    <p style="font-size:medium">Te mostramos las diferentes vías de comunicación para que puedas realizar tu consulta:</p>
+                    <br />
+
+                </div>
+              
+                    <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+                        <div class="col-lg-12">
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="info-box mt-6">
+
+                                        <p>@Html.ActionLink("PREGUNTAS FRECUENTES", "Faq", "Home", new { }, new { @class = "btn  btn-primary" })</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-box mt-6">
+
+                                        <p>@Html.ActionLink("Dejanos tu MENSAJE", "Mensaje", "Home", new { }, new { @class = "btn  btn-danger" })</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                
+                <br />
+                <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="col-lg-12">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="info-box">
+                                    <i class="bx bx-map"></i>
+                                    <h3>Nuestra Dirección</h3>
+                                    <p>Pedro Patat Sur 500. Colonia Caroya. Córdoba</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4">
+                                    <i class="bx bx-envelope"></i>
+                                    <h3>Nuestros E-mails</h3>
+                                    <p>info@j&aCarnes.com<br>contact@j&aCarnes.com</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4">
+                                    <i class="bx bx-phone-call"></i>
+                                    <h3>Nuestros Teléfonos</h3>
+                                    <p>3525-680250<br>3525-449510</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Contact Section -->
+
+    </main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>J&ACarnes SA<span>.</span></h3>
+                        <p>
+                            Pedro Patat Sur 500<br>
+                            Colonia Caroya - Córdoba<br>
+                            Argentina <br><br>
+                            <strong>Teléfono:</strong>3525-449510 <br>
+                            <strong>E-mail:</strong> info@j&aCarnes.com<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#about">Conocenos</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#services">Repartos</a></li>
+
+                        </ul>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container d-md-flex py-4">
+
+            <div class="mr-md-auto text-center text-md-left">
+                <div class="copyright">
+                    &copy; Copyright <strong><span></span></strong>. All Rights Reserved
+                </div>
+
+            </div>
+            <div class="social-links text-center text-md-right pt-3 pt-md-0">
+
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+
+
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/Content/templatePrinc/assets/vendor/jquery/jquery.min.js"></script>
+
+    <script src="~/Content/templatePrinc/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Content/templatePrinc/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+
+
+    <script src="~/Content/templatePrinc/assets/vendor/php-email-form/validate.js"></script>
+    <script src="~/Content/templatePrinc/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+
+    <script src="~/Content/templatePrinc/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+
+    <script src="~/Content/templatePrinc/assets/vendor/counterup/counterup.min.js"></script>
+
+
+    <script src="~/Content/templatePrinc/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+    <script src="~/Content/templatePrinc/assets/vendor/venobox/venobox.min.js"></script>
+
+    <script src="~/Content/templatePrinc/assets/vendor/aos/aos.js"></script>
+
+
+    <script src="~/Content/js/all.js"></script>
+    <!-- Template Main JS File -->
+    <script src="~/Content/templatePrinc/assets/js/main.js"></script>
+    <!-- ver -->
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
