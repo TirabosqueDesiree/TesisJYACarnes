@@ -250,6 +250,7 @@
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\VMAgregarProducto.cs" />
     <Compile Include="Models\VMFechas.cs" />
+    <Compile Include="Models\VMListaPedConFiltro.cs" />
     <Compile Include="Models\VMMipedido.cs" />
     <Compile Include="Models\VMPedido.cs" />
     <Compile Include="Models\DTOPedidoDetalle.cs" />

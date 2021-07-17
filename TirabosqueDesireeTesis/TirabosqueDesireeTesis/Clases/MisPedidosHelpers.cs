@@ -47,6 +47,12 @@ namespace TirabosqueDesireeTesis.Clases
 
             return lista;
         }
+
+        internal static object GetListaPedidosXfecha(DateTime fecha)
+        {
+            throw new NotImplementedException();
+        }
+
         public static List<DTODetallePed> GetDTODetallePed(int id)
         {
 

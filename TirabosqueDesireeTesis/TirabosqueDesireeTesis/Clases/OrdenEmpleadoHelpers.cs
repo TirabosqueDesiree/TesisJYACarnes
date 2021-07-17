@@ -11,8 +11,42 @@ namespace TirabosqueDesireeTesis.Clases
     public class OrdenEmpleadoHelpers : IDisposable
     {
         private static CarniceriaContext db = new CarniceriaContext();
+        private static string cadenaCon = "Data Source=desiree;Initial Catalog=DesireeCarniceria;Integrated Security=True";
 
-        
+        public static List<DTOPedido> GetListaPedidosXfecha(DateTime fecha)
+        {
+            var lista = new List<DTOPedido>();
+            var sql = @"SELECT p.IdPedido, p.FechaPedido, u.Apellido + ' '+ u.Nombre as Usuario, p.Observacion, e.Descripcion,  sum(d.Precio*d.Cantidad) Total
+                        from Pedidoes p, Usuarios u, DetallePedidoes d,  Estadoes e
+                        where p.IdUsuario=u.idUsuario and d.IdPedido=p.IdPedido and e.IdEstado=p.IdEstado
+						and p.FechaPedido=@FechaPedido
+                        group by p.IdPedido, p.FechaPedido, u.Apellido, u.Nombre, p.Observacion, e.Descripcion";
+
+            SqlConnection conex = new SqlConnection(cadenaCon);
+            conex.Open();
+            SqlCommand cmd = new SqlCommand(sql, conex);
+            cmd.Parameters.AddWithValue("@FechaPedido", fecha);
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr != null)
+            {
+                while (dr.Read())
+                {
+                    DTOPedido p = new DTOPedido();
+                    p.IdPedido = (int)dr["idPedido"];
+                    p.Fecha = (DateTime)dr["FechaPedido"];
+                    p.Usuario = dr["Usuario"].ToString();
+                    p.Observacion = dr["Observacion"].ToString();
+                    p.Estado = dr["Descripcion"].ToString();
+                    p.Total = (decimal)dr["Total"];
+
+                    lista.Add(p);
+                }
+            }
+            dr.Close();
+            conex.Close();
+
+            return lista;
+        }
 
         public static List<DTOPedido> GetPedidosEmpleado()
         {
@@ -87,21 +121,7 @@ namespace TirabosqueDesireeTesis.Clases
             return lista;
         }
 
-        //public void EditarEstadoPedido(Pedido p, int idEstado)
-        //{
-        //    string cadenaCon = "Data Source=desiree;Initial Catalog=DesireeCarniceria;Integrated Security=True";
-
-        //    var sql = "UPDATE Pedidoes SET IdEstado=@idEstado WHERE IdPedido=@idPedido";
-        //    SqlConnection conex = new SqlConnection(cadenaCon);
-        //    conex.Open();
-        //    SqlCommand cmd = new SqlCommand(sql, conex);
-        //    cmd.Parameters.AddWithValue("@idEstado", p.IdEstado);
-           
-
-        //    cmd.ExecuteNonQuery();
-        //    conex.Close();
-
-        //}
+       
         public static List<Estado> GetEstados()
         {
 

@@ -14,11 +14,52 @@ namespace TirabosqueDesireeTesis.Controllers
 
         public ActionResult ListaPedidos()
         {
-            var lista = OrdenEmpleadoHelpers.GetPedidosEmpleado();
-
-            return View(lista);
+            var vm = new VMListaPedConFiltro
+            {
+                FechaPedido = DateTime.Now,
+                ListaDTO = OrdenEmpleadoHelpers.GetPedidosEmpleado()
+            };
+            return View(vm);
         }
 
+        [HttpPost]
+        public ActionResult ListaPedidos(FormCollection form, VMListaPedConFiltro vm)
+        {
+            var fecha = Convert.ToDateTime(form["FechaPedido"]);
+            if (fecha!=null)
+            {
+                var view = new VMListaPedConFiltro
+                {
+                    FechaPedido = vm.FechaPedido,
+                    ListaDTO = OrdenEmpleadoHelpers.GetPedidosEmpleado()
+                };
+               
+
+                var vmodel = new VMListaPedConFiltro
+                {
+                    FechaPedido = view.FechaPedido,
+                    ListaDTO = OrdenEmpleadoHelpers.GetListaPedidosXfecha(view.FechaPedido),
+                };
+
+                return View(vmodel);
+            }
+            else
+            {
+                ViewBag.ErrorFecha = "Debe Seleccionar una fecha";
+                var v = new VMListaPedConFiltro
+                {
+                    FechaPedido = DateTime.Now,
+                    ListaDTO = OrdenEmpleadoHelpers.GetPedidosEmpleado()
+                };
+                return View(v);
+               
+            }
+           
+
+
+
+
+        }
 
         public ActionResult ListaDetalle(int id)
         {
@@ -81,12 +122,12 @@ namespace TirabosqueDesireeTesis.Controllers
 
                 ViewBag.Pedido = idPedido2;
             }
-            
 
-            return  View();
-          
 
-           
+            return View();
+
+
+
         }
 
     }
