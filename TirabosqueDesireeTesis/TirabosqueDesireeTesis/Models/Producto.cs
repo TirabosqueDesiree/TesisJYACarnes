@@ -32,6 +32,7 @@ namespace TirabosqueDesireeTesis.Models
         public decimal Precio { get; set; }
 
         [NotMapped]
+        [Display(Name = "Imagen")]
         public HttpPostedFileBase ImagenFile { get; set; }
 
 

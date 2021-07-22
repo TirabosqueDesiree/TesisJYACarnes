@@ -11,8 +11,9 @@
 
     <h3>¡Esta seguro de eliminar esta categoría?</h3>
     <div>
-        
+
         <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Descripcion)
@@ -29,8 +30,8 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-danger" /> |
-                @Html.ActionLink("Listado de categorías", "Index", new { }, new { @class="btn btn-success"})
+                <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                @Html.ActionLink("Listado de categorías", "Index", new { }, new { @class = "btn btn-success" })
             </div>
         }
     </div>

@@ -202,7 +202,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalidadesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ManualUsuarioController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\OrdenEmpleadoController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />

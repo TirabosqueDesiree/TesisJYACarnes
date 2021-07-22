@@ -151,6 +151,7 @@ namespace TirabosqueDesireeTesis.Controllers
             {
                 db.Categorias.Remove(categoria);
                 db.SaveChanges();
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -166,8 +167,8 @@ namespace TirabosqueDesireeTesis.Controllers
                     ModelState.AddModelError(string.Empty, ex.Message);
                 }
             }
-           
-            return RedirectToAction("Index");
+
+            return View(categoria);
         }
 
         protected override void Dispose(bool disposing)
