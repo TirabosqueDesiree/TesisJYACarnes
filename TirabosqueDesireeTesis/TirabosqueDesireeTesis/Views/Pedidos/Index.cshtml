@@ -8,7 +8,7 @@
     <h2>Listado de pedidos:</h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Crear", "Create", new { }, new { @class="btn btn-primary"})
     </p>
     <table class="table">
         <tr>
@@ -45,7 +45,7 @@
                 </td>
                 <td>
 
-                    @Html.ActionLink("Detalle", "Details", new { id = item.IdPedido }) |
+                    @Html.ActionLink("Ver", "VerPedido","Pedidos", new { id = item.IdPedido }, new { @class="btn btn-secondary"}) 
 
                 </td>
             </tr>

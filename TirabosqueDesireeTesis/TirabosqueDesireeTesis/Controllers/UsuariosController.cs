@@ -98,7 +98,7 @@ namespace TirabosqueDesireeTesis.Controllers
             return View(usuario);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

@@ -27,7 +27,7 @@ namespace TirabosqueDesireeTesis.Models
         public int IdMarca { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
-
+        [DisplayFormat(DataFormatString ="{0:C2}", ApplyFormatInEditMode =false)]
         [Range(0, double.MaxValue, ErrorMessage = "The field {0} can take values between {1} and {2}")]
         public decimal Precio { get; set; }
 

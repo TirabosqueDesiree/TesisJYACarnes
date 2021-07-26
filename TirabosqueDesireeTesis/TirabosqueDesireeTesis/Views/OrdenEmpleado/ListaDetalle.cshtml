@@ -45,7 +45,7 @@
                     @Html.DisplayFor(modelItem => item.IdPedido)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
+                    @item.Fecha.ToString("dd/MM/yyyy")
                 </td>
 
                 <td>
@@ -55,6 +55,7 @@
                     @Html.DisplayFor(modelItem => item.Cantidad)
                 </td>
                 <td>
+                    $
                     @Html.DisplayFor(modelItem => item.Precio)
                 </td>
                 <td>

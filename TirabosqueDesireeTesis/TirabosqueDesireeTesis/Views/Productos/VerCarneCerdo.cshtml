@@ -12,7 +12,7 @@
 
             @if (Session["User"] == null)
             {
-                <p>Si desea realizar un pedido debe <b>"Iniciar Sesión"</b> previamente</p>
+                <p>Si desea realizar un pedido debe estar REGISTRADO e <b>"Iniciar Sesión"</b> previamente</p>
 
             }
         </div>
@@ -51,6 +51,7 @@
                     @Html.DisplayFor(modelItem => item.Marca)
                 </td>
                 <td>
+                    $
                     @Html.DisplayFor(modelItem => item.Precio)
                 </td>
 
